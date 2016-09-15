@@ -7056,3 +7056,6 @@ button.close {
   width: 100%;
   outline: none;
   resize: none; }
+
+.transactions-table th:hover {
+  cursor: pointer; }

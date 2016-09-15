@@ -15,6 +15,7 @@ import { render } from './render';
  * validation (for new customer form input)
  * Add fields to new customer form: image, birthdate
  * pagination
+ * cache transactions table sort results
  * npm symlinks for root level
  * Tests
  */
