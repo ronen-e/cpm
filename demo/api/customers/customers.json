@@ -1,0 +1,55 @@
+{"data" : {
+    "customers": [
+      {
+        "id": 1,
+        "name": "David R",
+        "age": 921880800000,
+        "gender": "Male",
+        "imageId": "/assets/images/avatars/avatar-default.png",
+        "transactions": [
+            {
+                "id": 1,
+                "itemId": 1,
+                "purchaseDate": 1423686002240,
+                "name": "Kitchen sink",
+                "price": 1000.00
+            },
+            {
+                "id": 2,
+                "itemId": 2,
+                "purchaseDate": 1323686002240,
+                "name": "Apple",
+                "price": 4.50
+            },
+            {
+                "id": 3,
+                "itemId": 22,
+                "purchaseDate": 1123686002240,
+                "name": "Bananas",
+                "price": 33.80
+            },
+            {
+                "id": 4,
+                "itemId": 45,
+                "purchaseDate": 1776686002240,
+                "name": "Oranges",
+                "price": 16.09
+            }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Anne Droid",
+        "age": 829947600000,
+        "gender": "Female",
+        "imageId": "/assets/images/avatars/avatar-benderson.png"
+      },
+      {
+        "id": 3,
+        "name": "Morgan McCircuit",
+        "age": 640558800000,
+        "gender": "Male",
+        "imageId": "/assets/images/avatars/avatar-sumo.png"
+      }]
+    }
+}
