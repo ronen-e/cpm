@@ -5,7 +5,7 @@
         "name": "David R",
         "age": 921880800000,
         "gender": "Male",
-        "imageId": "/assets/images/avatars/avatar-default.png",
+        "imageId": "/cpm/assets/images/avatars/avatar-default.png",
         "transactions": [
             {
                 "id": 1,
@@ -42,14 +42,14 @@
         "name": "Anne Droid",
         "age": 829947600000,
         "gender": "Female",
-        "imageId": "/assets/images/avatars/avatar-benderson.png"
+        "imageId": "/cpm/assets/images/avatars/avatar-benderson.png"
       },
       {
         "id": 3,
         "name": "Morgan McCircuit",
         "age": 640558800000,
         "gender": "Male",
-        "imageId": "/assets/images/avatars/avatar-sumo.png"
+        "imageId": "/cpm/assets/images/avatars/avatar-sumo.png"
       }]
     }
 }

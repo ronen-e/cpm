@@ -2,7 +2,7 @@ import superagent from 'superagent';
 
 function fetchCustomers() {
     return new Promise((resolve, reject) => {
-        superagent.get('/api/customers/customers.json')
+        superagent.get('/cpm/api/customers/customers.json')
         .set('Accept', 'application/json')
         .end( function(err, response) {
             if (err) {

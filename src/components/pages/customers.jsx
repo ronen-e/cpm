@@ -31,7 +31,7 @@ export default class Customers extends Component {
         return (
             <ul className="list-group">
                 {customers.map(customer => (
-                    <Link key={ customer.id } to={`/customers/${customer.id}`} className={ linkClassName(customer.id) }>
+                    <Link key={ customer.id } to={`/cpm/customers/${customer.id}`} className={ linkClassName(customer.id) }>
                         { customer.name }
                     </Link>
                 ))}
@@ -50,7 +50,7 @@ export default class Customers extends Component {
         return (
             <div className="row">
                 <div className="master col-sm-4">
-                    <Link to="/new-customer" className="btn btn-primary panel">Add Customer</Link><br />
+                    <Link to="/cpm/new-customer" className="btn btn-primary panel">Add Customer</Link><br />
                     { customersListComponent }
                 </div>
                 <div className="detail col-sm-8">

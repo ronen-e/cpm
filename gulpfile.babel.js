@@ -81,5 +81,5 @@ gulp.task('watch', ['serve'], () => {
 
 gulp.task('demo', ['transpile'], () => {
     gulp.src(['public/**/*'])
-    .pipe(gulp.dest('demo'));
+    .pipe(gulp.dest('./'));
 });

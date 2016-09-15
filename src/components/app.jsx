@@ -13,8 +13,8 @@ export default class App extends Component {
     render() {
         return (
             <Router history={ browserHistory }>
-                <Redirect from="/" to="/customers" />
-                <Route path="/" component={ Layout }>
+                <Redirect from="/cpm" to="/cpm/customers" />
+                <Route path="/cpm" component={ Layout }>
                     <Route path="customers" component={ CustomersPage }>
                         <Route path=":customerId" component={ Customer }/>
                     </Route>

@@ -26,7 +26,7 @@ export default class NewCustomerPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.customers !== this.props.customers) {
-            navigateTo('/customers');
+            navigateTo('/cpm/customers');
         }
     }
 

@@ -1,1 +1,1 @@
-export const DEFAULT_AVATAR = '/assets/images/avatars/avatar-default.png';
+export const DEFAULT_AVATAR = '/cpm/assets/images/avatars/avatar-default.png';
