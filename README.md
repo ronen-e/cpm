@@ -1,6 +1,6 @@
-# CPM sample application
+# CRM sample application
 
-A sample CPM application used as an exercise.
+A sample CRM application used as an exercise.
 
 
 # Installing
