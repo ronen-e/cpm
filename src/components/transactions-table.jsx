@@ -18,8 +18,7 @@ export default class TransactionsTable extends Component {
         };
     }
     setSortKey(key) {
-        console.info('setSortKey', key);
-        this.setState({ sortBy: key })
+        this.setState({ sortBy: key });
     }
 
     render() {
