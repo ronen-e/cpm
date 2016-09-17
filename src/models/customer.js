@@ -57,7 +57,7 @@ export class Customer extends CustomerFields {
             age: this.age,
             gender: this.gender,
             imageId: this.imageId,
-            transactions: this.transactions.toArray()
+            transactions: this.transactions.toArray().map(t => t.toJSON())
         };
     }
 
