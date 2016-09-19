@@ -26,11 +26,13 @@ class Storage {
         if (data) {
             try {
                 obj = JSON.parse(data);
-            } catch(e) { }
-
-            if (!version || obj && obj.version === version) {
-                item = obj.data;
+                if (!version || obj && obj.version === version) {
+                    item = obj.data;
+                }
+            } catch (e) {
+                // do nothing
             }
+
         }
 
         return item;

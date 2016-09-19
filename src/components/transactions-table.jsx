@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Transaction } from '../models/transaction';
-import Radium, { Style } from 'radium';
+import { Style } from 'radium';
 
-@Radium
 export default class TransactionsTable extends Component {
     static displayName = 'TransactionsTable';
     static propTypes = {
@@ -13,33 +12,32 @@ export default class TransactionsTable extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            sortBy: 'id'
-        };
+        this.state = { sortKey: 'id' };
     }
-    setSortKey(key) {
-        this.setState({ sortBy: key });
+    sortBy(sortKey) {
+        this.setState({ sortKey });
     }
 
     render() {
         var { items } = this.props;
+        var tableStyle = (
+            <Style scopeSelector='.transactions-table' rules={{
+                    th: { fontWeight: 'normal' }
+                }} />
+        );
         items = items.sortBy((item) => item[this.state.sortBy]);    // TODO - cache results if key was not changed
 
         return (
             <div className="table-responsive transactions-table">
-                <Style scopeSelector='.transactions-table' rules={{
-                        th: {
-                            fontWeight: 'normal'
-                        }}
-                    } />
+                { tableStyle }
                 <table className="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th onClick={() => this.setSortKey('id')}>ID</th>
-                            <th onClick={() => this.setSortKey('purchaseDate')}>DATE</th>
-                            <th onClick={() => this.setSortKey('itemId')}>Item ID</th>
-                            <th onClick={() => this.setSortKey('name')}>Item Name</th>
-                            <th onClick={() => this.setSortKey('price')}>Payment ($)</th>
+                            <th onClick={() => this.sortBy('id')}>ID</th>
+                            <th onClick={() => this.sortBy('purchaseDate')}>DATE</th>
+                            <th onClick={() => this.sortBy('itemId')}>Item ID</th>
+                            <th onClick={() => this.sortBy('name')}>Item Name</th>
+                            <th onClick={() => this.sortBy('price')}>Payment ($)</th>
                         </tr>
                     </thead>
                     <tbody>
