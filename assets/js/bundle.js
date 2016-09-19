@@ -58097,7 +58097,7 @@ var Layout = function (_Component) {
                         _react2.default.createElement(
                             "span",
                             { className: "navbar-brand" },
-                            "MY CPM"
+                            "MY CRM"
                         )
                     )
                 ),
