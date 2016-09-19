@@ -6,7 +6,7 @@ export default class Layout extends Component {
             <div className="container-fluid">
                 <header className="top-menu navbar navbar-default navbar-static-top">
                     <nav className="container" role="navigation">
-                        <span className="navbar-brand">MY CPM</span>
+                        <span className="navbar-brand">MY CRM</span>
                     </nav>
                 </header>
                 { this.props.children }
