@@ -18,9 +18,9 @@ export class Transaction extends TransactionFields {
 
         [
             'id', 'itemId', 'purchaseDate', 'name', 'price'
-        ].forEach(field =>
-            fields[field] = (data[field] !== undefined) ? data[field] : this.get(field)
-        );
+        ].forEach(field => {
+            fields[field] = (data[field] !== undefined) ? data[field] : this.get(field);
+        });
 
         var newTransaction = new Transaction(fields);
         return Immutable.is(this, newTransaction) ? this : newTransaction;

@@ -21,9 +21,9 @@ export class Customer extends CustomerFields {
 
         [
             'id', 'name', 'age', 'gender', 'imageId'
-        ].forEach(field =>
-            fields[field] = (data[field] !== undefined) ? data[field] : this.get(field)
-        );
+        ].forEach(field => {
+            fields[field] = (data[field] !== undefined) ? data[field] : this.get(field);
+        });
 
         if (data.hasOwnProperty('transactions')) {
             fields.transactions = newList(data.transactions.map(item => new Transaction(item)));
@@ -41,7 +41,7 @@ export class Customer extends CustomerFields {
         var age = now.getFullYear() - then.getFullYear();
         var m = now.getMonth() - then.getMonth();
         if (m < 0 || (m === 0 && now.getDate() < then.getDate())) {
-            age--;
+            age = age - 1;
         }
         return age;
     }

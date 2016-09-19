@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { Transaction } from '../models/transaction';
-import Radium, { Style } from 'radium';
+import { Style } from 'radium';
 
-@Radium
+const ASC = 'ASC';
+const DESC = 'DESC';
+
 export default class TransactionsTable extends Component {
     static displayName = 'TransactionsTable';
     static propTypes = {
@@ -13,33 +15,58 @@ export default class TransactionsTable extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            sortBy: 'id'
-        };
+        this.state = { sortKey: 'id', direction: ASC };
     }
-    setSortKey(key) {
-        this.setState({ sortBy: key });
+    sortBy(sortKey, direction = ASC) {
+        if (sortKey === this.state.sortKey && this.state.direction === ASC) {
+            direction = DESC;
+        }
+        this.setState({ sortKey, direction });
+    }
+
+    comparator(a, b, direction) {
+        var result;
+        switch (typeof a) {
+            case 'number':
+                result = a - b;
+                break;
+            case 'string':
+                result = a.localeCompare(b);
+                break;
+        }
+
+        if (direction === DESC) {
+            result = -(result);
+        }
+        return result;
     }
 
     render() {
         var { items } = this.props;
-        items = items.sortBy((item) => item[this.state.sortBy]);    // TODO - cache results if key was not changed
+        var { sortKey, direction } = this.state;
+
+        var tableStyle = (
+            <Style scopeSelector=".transactions-table" rules={{
+                    th: { fontWeight: 'normal' }
+                }} />
+        );
+
+        items = items.sortBy(
+            (item) => item[sortKey],
+            (a, b) => this.comparator(a, b, direction)
+        );
 
         return (
             <div className="table-responsive transactions-table">
-                <Style scopeSelector='.transactions-table' rules={{
-                        th: {
-                            fontWeight: 'normal'
-                        }}
-                    } />
+                { tableStyle }
                 <table className="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th onClick={() => this.setSortKey('id')}>ID</th>
-                            <th onClick={() => this.setSortKey('purchaseDate')}>DATE</th>
-                            <th onClick={() => this.setSortKey('itemId')}>Item ID</th>
-                            <th onClick={() => this.setSortKey('name')}>Item Name</th>
-                            <th onClick={() => this.setSortKey('price')}>Payment ($)</th>
+                            <th onClick={ () => this.sortBy('id') }>ID</th>
+                            <th onClick={ () => this.sortBy('purchaseDate') }>DATE</th>
+                            <th onClick={ () => this.sortBy('itemId') }>Item ID</th>
+                            <th onClick={ () => this.sortBy('name') }>Item Name</th>
+                            <th onClick={ () => this.sortBy('price') }>Payment ($)</th>
                         </tr>
                     </thead>
                     <tbody>

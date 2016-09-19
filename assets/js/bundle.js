@@ -58440,6 +58440,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
 var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
@@ -58456,7 +58460,7 @@ var _inherits2 = require('babel-runtime/helpers/inherits');
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _class, _class2, _temp;
+var _class, _temp;
 
 var _react = require('react');
 
@@ -58470,11 +58474,12 @@ var _transaction = require('../models/transaction');
 
 var _radium = require('radium');
 
-var _radium2 = _interopRequireDefault(_radium);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var TransactionsTable = (0, _radium2.default)(_class = (_temp = _class2 = function (_Component) {
+var ASC = 'ASC';
+var DESC = 'DESC';
+
+var TransactionsTable = (_temp = _class = function (_Component) {
     (0, _inherits3.default)(TransactionsTable, _Component);
 
     function TransactionsTable(props) {
@@ -58482,16 +58487,37 @@ var TransactionsTable = (0, _radium2.default)(_class = (_temp = _class2 = functi
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (TransactionsTable.__proto__ || Object.getPrototypeOf(TransactionsTable)).call(this, props));
 
-        _this.state = {
-            sortBy: 'id'
-        };
+        _this.state = { sortKey: 'id', direction: ASC };
         return _this;
     }
 
     (0, _createClass3.default)(TransactionsTable, [{
-        key: 'setSortKey',
-        value: function setSortKey(key) {
-            this.setState({ sortBy: key });
+        key: 'sortBy',
+        value: function sortBy(sortKey) {
+            var direction = arguments.length <= 1 || arguments[1] === undefined ? ASC : arguments[1];
+
+            if (sortKey === this.state.sortKey && this.state.direction === ASC) {
+                direction = DESC;
+            }
+            this.setState({ sortKey: sortKey, direction: direction });
+        }
+    }, {
+        key: 'comparator',
+        value: function comparator(a, b, direction) {
+            var result;
+            switch (typeof a === 'undefined' ? 'undefined' : (0, _typeof3.default)(a)) {
+                case 'number':
+                    result = a - b;
+                    break;
+                case 'string':
+                    result = a.localeCompare(b);
+                    break;
+            }
+
+            if (direction === DESC) {
+                result = -result;
+            }
+            return result;
         }
     }, {
         key: 'render',
@@ -58499,18 +58525,25 @@ var TransactionsTable = (0, _radium2.default)(_class = (_temp = _class2 = functi
             var _this2 = this;
 
             var items = this.props.items;
+            var _state = this.state;
+            var sortKey = _state.sortKey;
+            var direction = _state.direction;
+
+
+            var tableStyle = _react2.default.createElement(_radium.Style, { scopeSelector: '.transactions-table', rules: {
+                    th: { fontWeight: 'normal' }
+                } });
 
             items = items.sortBy(function (item) {
-                return item[_this2.state.sortBy];
-            }); // TODO - cache results if key was not changed
+                return item[sortKey];
+            }, function (a, b) {
+                return _this2.comparator(a, b, direction);
+            });
 
             return _react2.default.createElement(
                 'div',
                 { className: 'table-responsive transactions-table' },
-                _react2.default.createElement(_radium.Style, { scopeSelector: '.transactions-table', rules: {
-                        th: {
-                            fontWeight: 'normal'
-                        } } }),
+                tableStyle,
                 _react2.default.createElement(
                     'table',
                     { className: 'table table-condensed table-striped' },
@@ -58523,35 +58556,35 @@ var TransactionsTable = (0, _radium2.default)(_class = (_temp = _class2 = functi
                             _react2.default.createElement(
                                 'th',
                                 { onClick: function onClick() {
-                                        return _this2.setSortKey('id');
+                                        return _this2.sortBy('id');
                                     } },
                                 'ID'
                             ),
                             _react2.default.createElement(
                                 'th',
                                 { onClick: function onClick() {
-                                        return _this2.setSortKey('purchaseDate');
+                                        return _this2.sortBy('purchaseDate');
                                     } },
                                 'DATE'
                             ),
                             _react2.default.createElement(
                                 'th',
                                 { onClick: function onClick() {
-                                        return _this2.setSortKey('itemId');
+                                        return _this2.sortBy('itemId');
                                     } },
                                 'Item ID'
                             ),
                             _react2.default.createElement(
                                 'th',
                                 { onClick: function onClick() {
-                                        return _this2.setSortKey('name');
+                                        return _this2.sortBy('name');
                                     } },
                                 'Item Name'
                             ),
                             _react2.default.createElement(
                                 'th',
                                 { onClick: function onClick() {
-                                        return _this2.setSortKey('price');
+                                        return _this2.sortBy('price');
                                     } },
                                 'Payment ($)'
                             )
@@ -58597,13 +58630,12 @@ var TransactionsTable = (0, _radium2.default)(_class = (_temp = _class2 = functi
         }
     }]);
     return TransactionsTable;
-}(_react.Component), _class2.displayName = 'TransactionsTable', _class2.propTypes = {
+}(_react.Component), _class.displayName = 'TransactionsTable', _class.propTypes = {
     items: _reactImmutableProptypes2.default.listOf(_react.PropTypes.instanceOf(_transaction.Transaction)).isRequired
-}, _temp)) || _class;
-
+}, _temp);
 exports.default = TransactionsTable;
 
-},{"../models/transaction":584,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/inherits":14,"babel-runtime/helpers/possibleConstructorReturn":16,"radium":339,"react":545,"react-immutable-proptypes":357}],583:[function(require,module,exports){
+},{"../models/transaction":584,"babel-runtime/helpers/classCallCheck":10,"babel-runtime/helpers/createClass":11,"babel-runtime/helpers/inherits":14,"babel-runtime/helpers/possibleConstructorReturn":16,"babel-runtime/helpers/typeof":17,"radium":339,"react":545,"react-immutable-proptypes":357}],583:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -58666,7 +58698,7 @@ var Customer = exports.Customer = function (_CustomerFields) {
             var fields = {};
 
             ['id', 'name', 'age', 'gender', 'imageId'].forEach(function (field) {
-                return fields[field] = data[field] !== undefined ? data[field] : _this2.get(field);
+                fields[field] = data[field] !== undefined ? data[field] : _this2.get(field);
             });
 
             if (data.hasOwnProperty('transactions')) {
@@ -58688,7 +58720,7 @@ var Customer = exports.Customer = function (_CustomerFields) {
             var age = now.getFullYear() - then.getFullYear();
             var m = now.getMonth() - then.getMonth();
             if (m < 0 || m === 0 && now.getDate() < then.getDate()) {
-                age--;
+                age = age - 1;
             }
             return age;
         }
@@ -58778,7 +58810,7 @@ var Transaction = exports.Transaction = function (_TransactionFields) {
             var fields = {};
 
             ['id', 'itemId', 'purchaseDate', 'name', 'price'].forEach(function (field) {
-                return fields[field] = data[field] !== undefined ? data[field] : _this2.get(field);
+                fields[field] = data[field] !== undefined ? data[field] : _this2.get(field);
             });
 
             var newTransaction = new Transaction(fields);
@@ -58979,10 +59011,11 @@ var Storage = function () {
             if (data) {
                 try {
                     obj = JSON.parse(data);
-                } catch (e) {}
-
-                if (!version || obj && obj.version === version) {
-                    item = obj.data;
+                    if (!version || obj && obj.version === version) {
+                        item = obj.data;
+                    }
+                } catch (e) {
+                    // do nothing
                 }
             }
 
